@@ -20,6 +20,12 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        binding.homeSongCard01Cd.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, AlbumFragment())
+                    .commitAllowingStateLoss()
+        }
+
 
 
         return binding.root

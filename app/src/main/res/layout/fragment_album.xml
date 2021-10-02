@@ -16,6 +16,8 @@
             android:layout_marginTop="40dp"
             >
             <androidx.appcompat.widget.AppCompatImageButton
+
+                android:id="@+id/album__back_ic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/btn_arrow_black"
@@ -78,7 +80,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/album_song_artist_tv"
+                    android:id="@+id/album_song_singer_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="아이유 (IU)"
@@ -113,36 +115,77 @@
        <FrameLayout
            android:layout_width="380dp"
            android:layout_gravity="center"
+           android:padding="5dp"
            android:layout_height="wrap_content">
 
-           <androidx.cardview.widget.CardView
-               android:id="@+id/album_album_iv"
-               android:layout_gravity="center"
-               android:layout_marginTop="20dp"
-               app:cardCornerRadius="10dp"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content">
-               <ImageView
-                   android:layout_width="220dp"
-                   android:layout_height="220dp"
-                   android:scaleType="centerCrop"
-                   android:layout_gravity="center"
-                   android:src="@drawable/img_album_exp2" />
-           </androidx.cardview.widget.CardView>
+          <FrameLayout
+              android:layout_gravity="center"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+
+              <RelativeLayout
+
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  >
+                  <androidx.cardview.widget.CardView
+                      android:layout_centerInParent="true"
+                      android:id="@+id/album_album_iv"
+                      android:layout_gravity="center"
+                      android:layout_marginTop="20dp"
+                      app:cardCornerRadius="10dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+
+                      <ImageView
+                          android:layout_width="180dp"
+                          android:layout_height="180dp"
+                          android:scaleType="centerCrop"
+                          android:layout_gravity="center"
+                          android:src="@drawable/img_album_exp2" />
+
+                  </androidx.cardview.widget.CardView>
+
+
+
+              </RelativeLayout>
+
+              <ImageView
+                  android:layout_width="45dp"
+                  android:layout_height="45dp"
+                  android:src="@drawable/widget_black_play"
+                  android:layout_gravity="bottom|right"
+                  android:layout_margin="10dp"
+                  />
+
+
+          </FrameLayout>
+
+
 
            <ImageView
                android:layout_width="wrap_content"
-               android:layout_height="250dp"
+               android:layout_height="200dp"
                android:layout_gravity="right"
+               android:paddingRight="20dp"
                android:paddingTop="40dp"
+               android:paddingBottom="10dp"
                android:src="@drawable/img_album_lp"/>
+
+
+
+
+
+
        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButtonToggleGroup

@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,14 @@ class SongActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if(intent.hasExtra("title") && intent.hasExtra("singer")){
+
+            binding.songSongTitleTv.text= intent.getStringExtra("title")
+            binding.songSongSingerTv.text= intent.getStringExtra("singer")
+
+
+        }
 
         binding.songDownIc.setOnClickListener{
             finish()
