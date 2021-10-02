@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="40dp"
+            >
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_arrow_black"
+                android:scaleType="centerCrop"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+              />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/album_menu_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_player_more"
+                android:scaleType="centerCrop"
+                android:background="@null"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/album_heart_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_my_like_off"
+                android:scaleType="centerCrop"
+                android:background="@null"
+                android:foregroundGravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="7dp"
+                app:layout_constraintEnd_toStartOf="@+id/album_menu_btn"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/song_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+                <TextView
+                    android:id="@+id/album_song_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LILAC"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/album_song_artist_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아이유 (IU)"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toBottomOf="@+id/album_song_title_tv"/>
+
+
+                <TextView
+                    android:id="@+id/album_song_info_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20201.10.01 | 싱글 | 댄스"
+                    android:textColor="@color/gray"
+                    android:textSize="12dp"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toBottomOf="@+id/album_song_artist_tv"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <FrameLayout
+           android:layout_width="380dp"
+           android:layout_gravity="center"
+           android:layout_height="wrap_content">
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/album_album_iv"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               app:cardCornerRadius="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:layout_width="220dp"
+                   android:layout_height="220dp"
+                   android:scaleType="centerCrop"
+                   android:layout_gravity="center"
+                   android:src="@drawable/img_album_exp2" />
+           </androidx.cardview.widget.CardView>
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="250dp"
+               android:layout_gravity="right"
+               android:paddingTop="40dp"
+               android:src="@drawable/img_album_lp"/>
+       </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:singleSelection="true"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:selectionRequired="true"
+                >
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:text="수록곡"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:text="상세정보"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"/>
+
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:text="영상"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <FrameLayout
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/silver"/>
+
+
+                <LinearLayout
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@color/design_default_color_primary_dark"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_weight="0.95"
+                        android:background="@color/design_default_color_primary_dark" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@color/design_default_color_primary_dark"/>
+
+
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:background="@drawable/myrect"
+                android:backgroundTint="@color/silver"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="내 취향 MIX "
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:padding="0dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="13dp"
+                    android:textColor="@color/gray"
+
+                    />
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_toggle_off"
+                    android:scaleType="centerInside"
+                    android:background="@null"
+                    android:paddingRight="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="match_parent"
+              android:layout_height="40dp">
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/album_whole_select_btn"
+                  android:layout_width="60dp"
+                  android:layout_height="40dp"
+                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  app:layout_constraintStart_toEndOf="@+id/album_whole_select_check_btn"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:text="전체선택"
+                  android:textSize="10dp"
+                  android:textColor="@color/black"
+                  />
+
+               <ImageView
+                   android:id="@+id/album_whole_select_check_btn"
+                   android:layout_width="20dp"
+                   android:layout_height="wrap_content"
+                   android:scaleType="centerInside"
+                   android:src="@drawable/btn_playlist_select_off"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   />
+
+              <com.google.android.material.button.MaterialButton
+                  android:id="@+id/album_whole_listen_btn"
+                  android:layout_width="60dp"
+                  android:layout_height="40dp"
+                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:text="전체듣기"
+                  android:textSize="10dp"
+                  android:textColor="@color/black"
+                  />
+
+              <ImageView
+                  android:id="@+id/album_whole_listen_check_btn"
+                  android:layout_width="20dp"
+                  android:layout_height="wrap_content"
+                  android:scaleType="centerInside"
+                  android:src="@drawable/icon_browse_arrow_right"
+                  app:layout_constraintEnd_toStartOf="@+id/album_whole_listen_btn"
+                  app:layout_constraintTop_toTopOf="parent"
+                  />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+        <ScrollView
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+                   >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="01"
+                        android:textSize="17dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                       >
+                        <TextView
+                            android:id="@+id/album_list_title_01_tv"
+                            android:layout_width="40dp"
+                            android:layout_height="14dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="10dp"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/myrect"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary"
+                            android:textColor="@color/white"
+                            android:text="TITLE"/>
+
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/album_list_title_01_tv"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary_dark"
+                            android:text="라일락"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@+id/album_list_title_01_tv"
+                            app:layout_constraintStart_toStartOf="@+id/album_list_title_01_tv"
+                            android:textSize="12dp"
+                            android:text="아이유 (IU)"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_miniplayer_play"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_player_more"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02"
+                        android:textSize="17dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp"
+                        >
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary_dark"
+                            android:text="Flu"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="12dp"
+                            android:text="아이유 (IU)"/>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_miniplayer_play"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_player_more"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="03"
+                        android:textSize="17dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp"
+                        >
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary_dark"
+                            android:text="라일락"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="12dp"
+                            android:text="아이유 (IU)"/>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_miniplayer_play"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_player_more"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="04"
+                        android:textSize="17dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp"
+                        >
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary_dark"
+                            android:text="라일락"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="12dp"
+                            android:text="아이유 (IU)"/>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_miniplayer_play"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_player_more"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="30dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="05"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp"
+                        >
+
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:backgroundTint="@color/design_default_color_primary_dark"
+                            android:text="라일락"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textSize="12dp"
+                            android:text="아이유 (IU)"/>
+
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_miniplayer_play"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/btn_player_more"
+                        android:scaleType="centerCrop"
+                        android:background="@null"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
