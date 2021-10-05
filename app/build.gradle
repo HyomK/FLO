@@ -13,6 +13,7 @@ android {
     buildFeatures {
 
         viewBinding = true
+        dataBinding= true
 
     }
 
@@ -42,6 +43,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'org.honorato.multistatetogglebutton:multistatetogglebutton:0.2.2'
+
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -16,7 +16,6 @@
             android:layout_marginTop="40dp"
             >
             <androidx.appcompat.widget.AppCompatImageButton
-
                 android:id="@+id/album__back_ic"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -57,7 +56,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/song_info_layout"
@@ -75,7 +74,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     />
 
@@ -85,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="아이유 (IU)"
                     android:textColor="@color/black"
-                    android:textSize="15dp"
+                    android:textSize="13dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -99,12 +98,12 @@
                     android:layout_height="wrap_content"
                     android:text="20201.10.01 | 싱글 | 댄스"
                     android:textColor="@color/gray"
-                    android:textSize="12dp"
+                    android:textSize="11dp"
                     android:layout_marginTop="6dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintTop_toBottomOf="@+id/album_song_artist_tv"/>
+                    app:layout_constraintTop_toBottomOf="@+id/album_song_singer_tv"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -118,7 +117,19 @@
            android:padding="5dp"
            android:layout_height="wrap_content">
 
-          <FrameLayout
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="200dp"
+               android:layout_gravity="right"
+               android:paddingRight="20dp"
+               android:paddingTop="10dp"
+               android:paddingBottom="10dp"
+               android:src="@drawable/img_album_lp"/>
+
+
+
+           <FrameLayout
               android:layout_gravity="center"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
@@ -162,123 +173,67 @@
 
 
           </FrameLayout>
-
-
-
-           <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="200dp"
-               android:layout_gravity="right"
-               android:paddingRight="20dp"
-               android:paddingTop="40dp"
-               android:paddingBottom="10dp"
-               android:src="@drawable/img_album_lp"/>
-
-
-
-
-
-
        </FrameLayout>
 
+
         <LinearLayout
+            android:id="@+id/album_button_group_layout"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                app:singleSelection="true"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                app:selectionRequired="true"
-                >
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="수록곡"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"/>
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="상세정보"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"/>
+            android:background="@drawable/btn_bar_off"
+            android:layout_height="40dp">
 
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:text="영상"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_weight="1"
-                    />
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-
-            <FrameLayout
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="@color/silver"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginStart="20dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/album_subTitle_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="수록곡"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bar_on"
+                android:checkable="true"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
 
 
-                <LinearLayout
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="30dp"
-                        android:background="@color/design_default_color_primary_dark"/>
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="0.95"
-                        android:background="@color/design_default_color_primary_dark" />
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="3dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="36dp"
-                        android:layout_marginRight="30dp"
-                        android:background="@color/design_default_color_primary_dark"/>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/album_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="상세정보"
+                android:textSize="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bar_off"
+                android:textColor="@color/black"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/album_video_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_bar_off"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="영상"
+                android:textSize="13dp"
+                android:paddingHorizontal="30dp"
+                android:textColor="@color/black"
+                />
 
 
+        </LinearLayout>
 
 
-                </LinearLayout>
-
-
-            </FrameLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="140dp"
-                android:layout_height="40dp"
+                android:id="@+id/album_mix_btn"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
                 android:background="@drawable/myrect"
                 android:backgroundTint="@color/silver"
                 android:layout_marginTop="15dp"
@@ -289,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:text="내 취향 MIX "
                     android:textStyle="bold"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     android:padding="0dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -300,6 +255,7 @@
 
                     />
                 <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/album_mix_switch_btn"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/btn_toggle_off"
@@ -308,6 +264,8 @@
                     android:paddingRight="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+
+
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -331,6 +289,7 @@
                <ImageView
                    android:id="@+id/album_whole_select_check_btn"
                    android:layout_width="20dp"
+                   android:layout_marginStart="10dp"
                    android:layout_height="wrap_content"
                    android:scaleType="centerInside"
                    android:src="@drawable/btn_playlist_select_off"
@@ -361,14 +320,13 @@
                   />
 
           </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
 
 
         <ScrollView
-            android:scrollbars="none"
             android:overScrollMode="never"
             android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -388,11 +346,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="01"
-                        android:textSize="17dp"
+                        android:textSize="15dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/song_list_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -415,7 +374,8 @@
 
 
                         <TextView
-                            android:layout_width="50dp"
+                            android:id="@+id/song_list01_title_layout"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
@@ -426,6 +386,7 @@
                             android:text="라일락"/>
 
                         <TextView
+                            android:id="@+id/song_list01_artist_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -437,6 +398,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/album_song_play_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/btn_miniplayer_play"
@@ -461,7 +423,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/song_list_02_layout"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -472,7 +435,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="02"
-                        android:textSize="17dp"
+                        android:textSize="15dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -485,7 +448,8 @@
                         >
 
                         <TextView
-                            android:layout_width="50dp"
+                            android:id="@+id/album_song_title02_tv"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
@@ -534,14 +498,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="03"
-                        android:textSize="17dp"
+                        android:textSize="15dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -561,7 +525,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
-                            android:text="라일락"/>
+                            android:text="Coin"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -605,14 +569,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="04"
-                        android:textSize="17dp"
+                        android:textSize="15dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -625,14 +589,14 @@
                         >
 
                         <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
-                            android:text="라일락"/>
+                            android:text="봄 안녕 봄"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -673,13 +637,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginVertical="30dp"
+                    android:layout_marginVertical="10dp"
                     >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="05"
+                        android:textSize="15dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -692,14 +657,14 @@
                         >
 
                         <TextView
-                            android:layout_width="50dp"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
-                            android:text="라일락"/>
+                            android:text="Celebrity"/>
 
                         <TextView
                             android:layout_width="wrap_content"

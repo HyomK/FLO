@@ -1,22 +1,26 @@
 package com.example.flo
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentHomeBinding
 
 
 class HomeFragment : Fragment() {
-    lateinit var binding: FragmentHomeBinding
 
+    lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -25,8 +29,6 @@ class HomeFragment : Fragment() {
                     .replace(R.id.main_frm, AlbumFragment())
                     .commitAllowingStateLoss()
         }
-
-
 
         return binding.root
     }
