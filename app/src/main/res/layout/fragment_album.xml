@@ -5,6 +5,7 @@
      android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/album_frm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -120,10 +121,10 @@
 
            <ImageView
                android:layout_width="wrap_content"
-               android:layout_height="200dp"
+               android:layout_height="170dp"
                android:layout_gravity="right"
-               android:paddingRight="20dp"
-               android:paddingTop="10dp"
+               android:paddingRight="30dp"
+               android:paddingTop="15dp"
                android:paddingBottom="10dp"
                android:src="@drawable/img_album_lp"/>
 
@@ -143,7 +144,6 @@
                   >
                   <androidx.cardview.widget.CardView
                       android:layout_centerInParent="true"
-                      android:id="@+id/album_album_iv"
                       android:layout_gravity="center"
                       android:layout_marginTop="20dp"
                       app:cardCornerRadius="10dp"
@@ -151,8 +151,9 @@
                       android:layout_height="wrap_content">
 
                       <ImageView
-                          android:layout_width="180dp"
-                          android:layout_height="180dp"
+                          android:id="@+id/album_album_iv"
+                          android:layout_width="160dp"
+                          android:layout_height="160dp"
                           android:scaleType="centerCrop"
                           android:layout_gravity="center"
                           android:src="@drawable/img_album_exp2" />
@@ -164,8 +165,8 @@
               </RelativeLayout>
 
               <ImageView
-                  android:layout_width="45dp"
-                  android:layout_height="45dp"
+                  android:layout_width="40dp"
+                  android:layout_height="40dp"
                   android:src="@drawable/widget_black_play"
                   android:layout_gravity="bottom|right"
                   android:layout_margin="10dp"
@@ -181,7 +182,7 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:background="@drawable/btn_bar_off"
+            android:background="@drawable/btn_bar_slim"
             android:layout_height="40dp">
 
 
@@ -207,7 +208,7 @@
                 android:text="상세정보"
                 android:textSize="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_bar_off"
+                android:background="@drawable/btn_bar_slim"
                 android:textColor="@color/black"
                 />
             <androidx.appcompat.widget.AppCompatButton
@@ -216,7 +217,7 @@
                 android:id="@+id/album_video_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_bar_off"
+                android:background="@drawable/btn_bar_slim"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:text="영상"
                 android:textSize="13dp"
@@ -274,13 +275,14 @@
               android:layout_width="match_parent"
               android:layout_height="40dp">
 
-              <com.google.android.material.button.MaterialButton
+              <TextView
                   android:id="@+id/album_whole_select_btn"
-                  android:layout_width="60dp"
+                  android:layout_width="70dp"
                   android:layout_height="40dp"
-                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  android:gravity="center"
                   app:layout_constraintStart_toEndOf="@+id/album_whole_select_check_btn"
                   app:layout_constraintTop_toTopOf="parent"
+                  android:background="@android:color/transparent"
                   android:text="전체선택"
                   android:textSize="10dp"
                   android:textColor="@color/black"
@@ -297,13 +299,14 @@
                    app:layout_constraintTop_toTopOf="parent"
                    />
 
-              <com.google.android.material.button.MaterialButton
+              <TextView
                   android:id="@+id/album_whole_listen_btn"
-                  android:layout_width="60dp"
+                  android:layout_width="70dp"
                   android:layout_height="40dp"
-                  style="@style/Widget.MaterialComponents.Button.TextButton"
+                  android:background="@android:color/transparent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toTopOf="parent"
+                  android:gravity="center"
                   android:text="전체듣기"
                   android:textSize="10dp"
                   android:textColor="@color/black"
@@ -323,13 +326,15 @@
 
 
         <ScrollView
+            android:id="@+id/album_list_layout"
             android:overScrollMode="never"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
+            android:paddingTop="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -346,7 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="01"
-                        android:textSize="15dp"
+                        android:textSize="11sp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -362,7 +367,7 @@
                             android:layout_height="14dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="15dp"
-                            android:textSize="10dp"
+                            android:textSize="8sp"
                             android:gravity="center"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/myrect"
@@ -380,6 +385,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@+id/album_list_title_01_tv"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
@@ -392,7 +398,7 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintTop_toBottomOf="@+id/album_list_title_01_tv"
                             app:layout_constraintStart_toStartOf="@+id/album_list_title_01_tv"
-                            android:textSize="12dp"
+                            android:textSize="10sp"
                             android:text="아이유 (IU)"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -435,7 +441,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="02"
-                        android:textSize="15dp"
+                        android:textSize="10sp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -453,6 +459,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
@@ -464,7 +471,7 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="12dp"
+                            android:textSize="10dp"
                             android:text="아이유 (IU)"/>
 
                     </LinearLayout>
@@ -505,7 +512,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="03"
-                        android:textSize="15dp"
+                        android:textSize="11sp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -522,6 +529,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
@@ -533,7 +541,7 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="12dp"
+                            android:textSize="10sp"
                             android:text="아이유 (IU)"/>
 
                     </LinearLayout>
@@ -576,7 +584,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="04"
-                        android:textSize="15dp"
+                        android:textSize="11dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -593,6 +601,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
@@ -604,7 +613,7 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="12dp"
+                            android:textSize="10sp"
                             android:text="아이유 (IU)"/>
 
                     </LinearLayout>
@@ -644,7 +653,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="05"
-                        android:textSize="15dp"
+                        android:textSize="11sp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -661,6 +670,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:backgroundTint="@color/design_default_color_primary_dark"
@@ -672,7 +682,7 @@
                             android:layout_marginTop="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:textSize="12dp"
+                            android:textSize="11sp"
                             android:text="아이유 (IU)"/>
 
                     </LinearLayout>

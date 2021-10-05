@@ -3,9 +3,12 @@ package com.example.flo
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -20,11 +23,13 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.example.flo.databinding.ToastCustomBinding
 
 class AlbumFragment : Fragment() {
     lateinit var binding:FragmentAlbumBinding
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -34,6 +39,18 @@ class AlbumFragment : Fragment() {
             Bundle?): View? {
 
         binding= FragmentAlbumBinding.inflate(inflater, container,false)
+
+
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            if(! bundle.isEmpty){
+                binding.albumSongTitleTv.text=bundle.getString("title")
+                binding.albumSongSingerTv.text=bundle.getString("singer")
+                binding.albumAlbumIv.setImageBitmap(bundle.getParcelable<Bitmap>("image"))
+                Log.d("bundle Okay",bundle.getString("title").toString() )
+            }
+
+        }
+
 
         binding.albumBackIc.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -72,7 +89,7 @@ class AlbumFragment : Fragment() {
             }
         }
 
-        val barOff : Drawable =  resources.getDrawable(R.drawable.btn_bar_off, null)
+        val barOff : Drawable =  resources.getDrawable(R.drawable.btn_bar_slim, null)
         val barOn : Drawable =  resources.getDrawable(R.drawable.btn_bar_on, null)
 
         binding.albumSubTitleBtn.setOnClickListener {
@@ -107,7 +124,21 @@ class AlbumFragment : Fragment() {
             }
         }
 
-
+        binding.albumWholeSelectBtn.setOnClickListener {
+            val ALL ="전체선택"
+            val NONE="선택해제"
+            if(binding.albumWholeSelectBtn.text.equals(NONE)){
+                binding.albumWholeSelectBtn.setTextColor(resources.getColor(R.color.black,null))
+                binding.albumWholeSelectCheckBtn.clearColorFilter()
+                binding.albumWholeSelectBtn.text=ALL
+                binding.albumListLayout.background=null
+            }else{
+                binding.albumWholeSelectBtn.setTextColor(resources.getColor(R.color.blue,null))
+                binding.albumWholeSelectCheckBtn.setColorFilter(R.color.blue)
+                binding.albumWholeSelectBtn.text=NONE
+                binding.albumListLayout.setBackgroundColor(resources.getColor(R.color.silver,null))
+            }
+        }
 
 
         return binding.root

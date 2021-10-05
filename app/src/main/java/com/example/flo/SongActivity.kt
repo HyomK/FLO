@@ -123,8 +123,8 @@ import com.example.flo.databinding.ToastCustomBinding
 
             binding.tvSample.text = message
             return Toast(context).apply {
-                setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 100.toPx())
-                duration = Toast.LENGTH_LONG
+                setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 130.toPx())
+                duration = Toast.LENGTH_SHORT
                 view = binding.root
             }
         }

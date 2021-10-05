@@ -11,6 +11,10 @@
         <item name="android:background">@color/cardview_dark_background</item>
     </style>
 
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:text">"전체듣기"</item>
 
+    </style>
 
 </resources>
