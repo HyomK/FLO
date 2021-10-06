@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.homeSongCard01Cd.setOnClickListener {
@@ -67,6 +68,7 @@ class HomeFragment : Fragment() {
                 .replace(R.id.main_frm, AlbumFragment())
                 .commit()
         }
+
 
         return binding.root
     }

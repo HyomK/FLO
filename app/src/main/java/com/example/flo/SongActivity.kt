@@ -1,23 +1,19 @@
 package com.example.flo
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
-import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.example.flo.databinding.ActivitySongBinding
 import com.example.flo.databinding.ToastCustomBinding
- class SongActivity: AppCompatActivity() {
+
+class SongActivity: AppCompatActivity() {
 
     lateinit var binding:ActivitySongBinding
 
@@ -33,7 +29,7 @@ import com.example.flo.databinding.ToastCustomBinding
 
 
         }else{
-            Toast.makeText(this,"false", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "false", Toast.LENGTH_SHORT).show();
         }
 
                binding.songDownIc.setOnClickListener{
@@ -69,10 +65,10 @@ import com.example.flo.databinding.ToastCustomBinding
 
                     if(binding.songShuffleIc.drawable.constantState == ON.constantState){
                         binding.songShuffleIc.setImageDrawable(OFF);
-                        SampleToast.createToast(this,"재생목록을 순서대로 재생합니다")?.show()
+                        SampleToast.createToast(this, "재생목록을 순서대로 재생합니다")?.show()
                     }else{
                         binding.songShuffleIc.setImageDrawable(ON);
-                        SampleToast.createToast(this,"재생목록을 랜덤으로 재생합니다")?.show()
+                        SampleToast.createToast(this, "재생목록을 랜덤으로 재생합니다")?.show()
                     }
                 }
 
@@ -94,10 +90,9 @@ import com.example.flo.databinding.ToastCustomBinding
                 }
 
 
-
     }
 
-    fun setPlayerStatus(isPlaying : Boolean){
+    fun setPlayerStatus(isPlaying: Boolean){
         if(isPlaying){
             binding.songPauseIc.visibility = View.GONE
             binding.songPlayIc.visibility= View.VISIBLE
@@ -108,12 +103,16 @@ import com.example.flo.databinding.ToastCustomBinding
         }
     }
 
-    fun switchBtn( off : Drawable , on : Drawable , status : Drawable) : Drawable {
+
+    fun switchBtn(off: Drawable, on: Drawable, status: Drawable) : Drawable {
         if(off.constantState==(status.constantState)){
             return on
         }
         return off
     }
+
+
+
     object SampleToast {
 
         fun createToast(context: Context, message: String): Toast? {

@@ -23,11 +23,14 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.example.flo.databinding.ToastCustomBinding
 
 class AlbumFragment : Fragment() {
+
+
     lateinit var binding:FragmentAlbumBinding
 
 
@@ -52,6 +55,8 @@ class AlbumFragment : Fragment() {
         }
 
 
+
+
         binding.albumBackIc.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, HomeFragment())
@@ -59,11 +64,11 @@ class AlbumFragment : Fragment() {
         }
 
         binding.songList02Layout.setOnClickListener {
-            Toast.makeText(activity,binding.songList01TitleLayout.text,Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,binding.albumSongTitle02Tv.text,Toast.LENGTH_SHORT).show()
         }
 
         binding.songListLayout.setOnClickListener {
-            Toast.makeText(activity,binding.albumSongTitle02Tv.text,Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,binding.albumSongTitle01Tv.text,Toast.LENGTH_SHORT).show()
         }
         binding.albumMixBtn.setOnClickListener {
 
@@ -139,6 +144,7 @@ class AlbumFragment : Fragment() {
                 binding.albumListLayout.setBackgroundColor(resources.getColor(R.color.silver,null))
             }
         }
+
 
 
         return binding.root
