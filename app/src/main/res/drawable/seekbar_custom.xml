@@ -3,7 +3,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@android:id/background">
-        <shape android:shape="line">    <!--선 : 길이6dp -->
+        <shape android:shape="line">
             <stroke android:width="4dp" android:color="@color/silver" />
         </shape>
     </item>
@@ -17,6 +17,7 @@
         </clip>
     </item>
 
+//progress
 
     <item android:id="@android:id/progress" >
         <clip>

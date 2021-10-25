@@ -20,6 +20,7 @@
     <color name="toggle_normal">@color/gainsboro</color>
     <color name="toggle_active">@color/silver</color>
     <color name="toggle_normal_off">@color/darkgray</color>
+    <color name="flo_main">#3F3FF0</color>
 
     <color name="gainsboro">#DCdCdC</color>
     <color name="darkgray">#a9a9a9</color>

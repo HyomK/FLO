@@ -15,7 +15,9 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : Fragment() {
@@ -69,6 +71,26 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
+
+         val bannerAdapter=BannerViewpagerAdapter(this)
+         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
+        binding.homeBannerVp.adapter=bannerAdapter
+        binding.homeBannerVp.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+
+
+        val backgroundAdapter = BackgroundViewpagerAdapter(this)
+        backgroundAdapter.addFragment(BackgroundFragment(R.drawable.img_default_4_x_1, R.drawable.img_album_exp,R.drawable.img_album_exp2,"포근하게 덮어준는 꿈의 목소리"))
+        backgroundAdapter.addFragment(BackgroundFragment(R.drawable.img_default_4_x_1, R.drawable.img_album_exp2,R.drawable.img_album_exp2,"새벽에 듣기 좋은 음악"))
+        backgroundAdapter.addFragment(BackgroundFragment(R.drawable.img_default_4_x_1, R.drawable.img_album_exp,R.drawable.img_album_exp,"운동할 때 신나게 듣기 좋은 음악"))
+        binding.homeBackgroundVp.adapter=backgroundAdapter
+        binding.homeBackgroundVp.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+
+        TabLayoutMediator(binding.homeBackgroundTb, binding.homeBackgroundVp){
+            tab,position->
+        }.attach()
 
         return binding.root
     }

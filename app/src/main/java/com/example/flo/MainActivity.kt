@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(){
         }
 
 
-        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString())
+        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(),215,true)
 
         binding.mainPlayerLayout.setOnClickListener{
             // startActivity(Intent(this, SongActivity::class.java))
@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity(){
             val intent =Intent(this, SongActivity::class.java)
             intent.putExtra("title", song.title)
             intent.putExtra("singer", song.singer)
+            intent.putExtra("playTime", song.playTime)
+            intent.putExtra("isPlaying", song.isPlaying)
+
             startActivity(intent)
 
 
@@ -107,11 +110,6 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    fun receiveData(song: Song){
-        binding.mainMiniplayerTitleTv.setText(song.title)
-        binding.mainMiniplayerSingerTv.setText(song.singer)
-        Log.d("Mytag", song.title.toString() + " " + song.singer.toString())
-    }
 
 }
 

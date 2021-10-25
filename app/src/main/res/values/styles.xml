@@ -16,5 +16,13 @@
         <item name="android:text">"전체듣기"</item>
 
     </style>
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+    </style>
 
+    <style name="locker_tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:tabStripEnabled">false</item>
+
+    </style>
 </resources>

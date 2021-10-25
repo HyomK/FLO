@@ -4,14 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       >
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="50dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보관함 프래그먼트"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+           <TextView
+               android:id="@+id/locker_title_tv"
+
+               android:layout_marginStart="15dp"
+               android:textStyle="bold"
+               android:textColor="@color/black"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="보관함"
+               android:textSize="20dp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintBottom_toBottomOf="@+id/locker_title_tv"
+               android:layout_marginEnd="20dp"
+               android:text="로그인"
+               android:textColor="@color/design_default_color_primary"
+               android:textSize="12sp"/>
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/locker_tb"
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="8dp"
+           android:layout_marginTop="5dp"
+           app:tabGravity="fill"
+           app:tabMode="fixed"
+           app:tabPaddingBottom="0dp"
+           app:tabPaddingEnd="0dp"
+           app:tabPaddingStart="0dp"
+           app:tabPaddingTop="0dp"
+           app:tabIndicatorFullWidth="false"
+           app:tabTextColor="@color/black"
+           app:tabTextAppearance="@style/locker_tab_text"
+           app:tabRippleColor="@android:color/transparent"
+           app:tabSelectedTextColor="@color/design_default_color_primary"
+           app:tabIndicatorColor="@color/design_default_color_primary"
+
+           />
+       <androidx.viewpager2.widget.ViewPager2
+           android:id="@+id/locker_vp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           />
+
+
+   </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
