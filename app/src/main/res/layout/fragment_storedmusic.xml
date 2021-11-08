@@ -2,18 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:text="저장한 곡이 없습니다"
-    android:gravity="center"
-    android:textSize="15dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<!--<TextView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent"-->
+<!--    android:text="저장한 곡이 없습니다"-->
+<!--    android:gravity="center"-->
+<!--    android:textSize="15dp"-->
+<!--    >-->
 
-</TextView>
+<!--</TextView>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/stored_fr_control_layout"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/stored_fr_whole_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/stored_fr_whole_select_check_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@android:color/transparent"
+            android:text="전체선택"
+
+            android:textColor="@color/black"
+            />
+
+        <ImageView
+            android:id="@+id/stored_fr_whole_select_check_btn"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/btn_playlist_select_off"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/album_whole_listen_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@+id/stored_fr_whole_listen_check_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:text="전체듣기"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            />
+
+        <ImageView
+            android:id="@+id/stored_fr_whole_listen_check_btn"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_browse_arrow_right"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toEndOf="@+id/stored_fr_whole_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+              android:textSize="14sp"
+              android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="편집"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stored_fr_list_rv"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/stored_fr_control_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_locker"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

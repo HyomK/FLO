@@ -15,6 +15,7 @@ class MusicfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding= FragmentMusicfileBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 }

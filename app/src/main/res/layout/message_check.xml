@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="130dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="220dp"
+        android:layout_height="130dp"
+        android:paddingHorizontal="30dp"
+        app:cardBackgroundColor="@color/silver"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:paddingHorizontal="40dp"
+            >
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_gravity="center"
+                android:id="@+id/check_title"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="30dp"
+                android:text="정말 삭제하시겠습니까?"
+                android:layout_marginBottom="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginVertical="30dp"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/check_title"
+                android:width="60dp"
+                android:height="25dp"
+                android:background="@color/flo_main"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="YES"
+                android:layout_marginEnd="10dp"
+                android:layout_columnSpan="1"
+                android:layout_rowSpan="1"
+                android:id="@+id/check_yes_btn"
+                android:backgroundTint="@color/flo_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/check_title"
+                android:width="60dp"
+                android:height="25dp"
+                android:background="@color/flo_main"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:id="@+id/check_no_btn"
+                android:text="NO"
+                android:backgroundTint="@color/flo_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

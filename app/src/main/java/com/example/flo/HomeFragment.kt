@@ -1,28 +1,22 @@
 package com.example.flo
 
-import android.content.Context
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.os.bundleOf
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 
 
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
+    private var albumDatas = ArrayList<Album>()
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -30,46 +24,79 @@ class HomeFragment : Fragment() {
     ): View {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        binding.homeSongCard01Cd.setOnClickListener {
-//            (context as MainActivity).supportFragmentManager.beginTransaction()
+//
+//        binding.homeSongCard01Cd.setOnClickListener {
+////            (context as MainActivity).supportFragmentManager.beginTransaction()
+////                    .replace(R.id.main_frm, AlbumFragment())
+////                    .commitAllowingStateLoss()
+//            setFragmentResult("requestKey",
+//                bundleOf(
+//                    "title" to binding.homeSongExp01Text01Tv.text.toString(),
+//                    "singer" to binding.homeSongExp01Text02Tv.text.toString(),
+//                    "image" to binding.homeSongEpx01Iv.drawable.toBitmap()
+//                ))
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.main_frm, AlbumFragment())
+//                .commit()
+//
+//        }
+//
+//        binding.homeSongCard02Cd.setOnClickListener {
+//            setFragmentResult("requestKey",
+//                bundleOf(
+//                    "title" to binding.homeSongExp02Text01Tv.text.toString(),
+//                    "singer" to binding.homeSongExp02Text02Tv.text.toString(),
+//                    "image" to binding.homeSongEpx02Iv.drawable.toBitmap()
+//                ))
+//            parentFragmentManager.beginTransaction()
 //                    .replace(R.id.main_frm, AlbumFragment())
-//                    .commitAllowingStateLoss()
-            setFragmentResult("requestKey",
-                bundleOf(
-                    "title" to binding.homeSongExp01Text01Tv.text.toString(),
-                    "singer" to binding.homeSongExp01Text02Tv.text.toString(),
-                    "image" to binding.homeSongEpx01Iv.drawable.toBitmap()
-                ))
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment())
-                .commit()
+//                .commit()
+//        }
+//
+//        binding.homeSongCard03Cd.setOnClickListener {
+//            setFragmentResult("requestKey",
+//                bundleOf(
+//                    "title" to binding.homeSongExp03Text01Tv.text.toString(),
+//                    "singer" to binding.homeSongExp03Text02Tv.text.toString(),
+//                    "image" to binding.homeSongEpx03Iv.drawable.toBitmap()
+//                ))
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.main_frm, AlbumFragment())
+//                .commit()
+//        }
 
+        //데이터 리스트 생성
+
+        albumDatas.apply{
+            var song :Song=Song("Savage","에스파",0,210,0,false)
+            val songList : ArrayList<Song> = ArrayList<Song>();
+            songList.add(song)
+            add(Album("Savage","에스파",R.drawable.savage,songList))
+            add(Album("쉬어","그레이노마",R.drawable.showme))
+            add(Album("Strawberry moon","아이유(IU)",R.drawable.strawberry))
+            add(Album("낙하","AKMU",R.drawable.nakha))
+            add(Album("Butter","방탄소년단 (BTS)",R.drawable.img_album_exp))
+            add(Album("Lilac","아이유(IU)",R.drawable.img_album_exp2)) // song 클래스 미추가 상태
         }
 
-        binding.homeSongCard02Cd.setOnClickListener {
-            setFragmentResult("requestKey",
-                bundleOf(
-                    "title" to binding.homeSongExp02Text01Tv.text.toString(),
-                    "singer" to binding.homeSongExp02Text02Tv.text.toString(),
-                    "image" to binding.homeSongEpx02Iv.drawable.toBitmap()
-                ))
-            parentFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, AlbumFragment())
-                .commit()
-        }
+        // 어댑터 생성
+        val albumRVAdapter = AlbumRVAdapter(albumDatas)
+        binding.homeRecycleviewRv.adapter=albumRVAdapter
 
-        binding.homeSongCard03Cd.setOnClickListener {
-            setFragmentResult("requestKey",
-                bundleOf(
-                    "title" to binding.homeSongExp03Text01Tv.text.toString(),
-                    "singer" to binding.homeSongExp03Text02Tv.text.toString(),
-                    "image" to binding.homeSongEpx03Iv.drawable.toBitmap()
-                ))
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment())
-                .commit()
-        }
+        albumRVAdapter.setMyItemCLickLister(object : AlbumRVAdapter.MyItemClickLister{
+            override fun onItemClick(album :Album) {
+                changeAlbumFragment(album)
+            }
+
+            override fun onRemoveAlbum(position: Int) {
+                albumRVAdapter.removeItem(position)
+            }
+        })
+
+        //레이아웃 매니저
+        binding.homeRecycleviewRv.layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
+
 
 
          val bannerAdapter=BannerViewpagerAdapter(this)
@@ -93,6 +120,20 @@ class HomeFragment : Fragment() {
         }.attach()
 
         return binding.root
+    }
+
+    private fun changeAlbumFragment(album: Album) {
+
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, AlbumFragment().apply {
+                    arguments = Bundle().apply {
+                        val gson = Gson()
+                        val albumJson = gson.toJson(album)
+                        putString("album",albumJson)
+
+                    }
+                })
+                .commitAllowingStateLoss()
     }
 
 

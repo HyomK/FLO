@@ -28,12 +28,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import com.example.flo.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 
 class AlbumFragment : Fragment() {
 
 
     lateinit var binding:FragmentAlbumBinding
+    private var gson: Gson = Gson()
     var information= arrayListOf("수록곡", "상세정보", "영상")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
@@ -44,26 +46,25 @@ class AlbumFragment : Fragment() {
 
         binding= FragmentAlbumBinding.inflate(inflater, container,false)
 
-
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            if(! bundle.isEmpty){
-                binding.albumSongTitleTv.text=bundle.getString("title")
-                binding.albumSongSingerTv.text=bundle.getString("singer")
-                binding.albumAlbumIv.setImageBitmap(bundle.getParcelable<Bitmap>("image"))
+        val albumData= arguments?.getString("album")
+        val album=gson.fromJson(albumData, Album::class.java)
+        setInit(album)
 
 
-                val albumAdapter = AlbumViewpagerAdapter(this, binding.albumSongTitleTv.text.toString(),  binding.albumSongSingerTv.text.toString())
-                binding.albumContentVp.adapter= albumAdapter
+//        setFragmentResultListener("requestKey") { requestKey, bundle ->
+//            if(! bundle.isEmpty){
+//                binding.albumSongTitleTv.text=bundle.getString("title")
+//                binding.albumSongSingerTv.text=bundle.getString("singer")
+//                binding.albumAlbumIv.setImageBitmap(bundle.getParcelable<Bitmap>("image"))
+//
+//
+//
+//                Log.d("bundle Okay",bundle.getString("title").toString() )
+//            }
+//
+//        }
 
-                TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
-                    tab,position->
-                    tab.text = information[position]
-                }.attach()
 
-                Log.d("bundle Okay",bundle.getString("title").toString() )
-            }
-
-        }
 
 
 
@@ -73,88 +74,7 @@ class AlbumFragment : Fragment() {
                     .replace(R.id.main_frm, HomeFragment())
                     .commitAllowingStateLoss()
         }
-//
-//        binding.songList02Layout.setOnClickListener {
-//            Toast.makeText(activity,binding.albumSongTitle02Tv.text,Toast.LENGTH_SHORT).show()
-//        }
-//
-//        binding.songListLayout.setOnClickListener {
-//            Toast.makeText(activity,binding.albumSongTitle01Tv.text,Toast.LENGTH_SHORT).show()
-//        }
-//        binding.albumMixBtn.setOnClickListener {
-//
-//            val OffStatus :Drawable = resources.getDrawable(R.drawable.btn_toggle_off, null)
-//
-//            if(OffStatus.constantState==(binding.albumMixSwitchBtn.drawable.constantState)){
-//                binding.albumMixSwitchBtn.setImageDrawable(resources.getDrawable(R.drawable.btn_toggle_on, null))
-//            }
-//            else{
-//                binding.albumMixSwitchBtn.setImageDrawable(OffStatus)
-//            }
-//
-//        }
-//
-//        binding.albumHeartBtn.setOnClickListener {
-//            val OffStatus :Drawable = resources.getDrawable(R.drawable.ic_my_like_off, null)
-//
-//            if(OffStatus.constantState==(binding.albumHeartBtn.drawable.constantState)){
-//                binding.albumHeartBtn.setImageDrawable(resources.getDrawable(R.drawable.ic_my_like_on, null))
-//            }
-//            else{
-//                binding.albumHeartBtn.setImageDrawable(OffStatus)
-//            }
-//        }
-//
-//        val barOff : Drawable =  resources.getDrawable(R.drawable.btn_bar_slim, null)
-//        val barOn : Drawable =  resources.getDrawable(R.drawable.btn_bar_on, null)
-//
-//        binding.albumSubTitleBtn.setOnClickListener {
-//            val btnStatus: Drawable = binding.albumSubTitleBtn.background
-//            if(btnStatus.constantState ==  barOff.constantState){
-//                binding.albumSubTitleBtn.background=barOn
-//                binding.albumDetailBtn.background=barOff
-//                binding.albumVideoBtn.background=barOff
-//            }else{
-//                binding.albumSubTitleBtn.background= barOff
-//            }
-//
-//        }
-//        binding.albumDetailBtn.setOnClickListener{
-//            val btnStatus: Drawable =   binding.albumDetailBtn.background
-//            if(btnStatus.constantState ==  barOff.constantState){
-//                binding.albumSubTitleBtn.background=barOff
-//                binding.albumDetailBtn.background=barOn
-//                binding.albumVideoBtn.background=barOff
-//            }else{
-//                binding.albumDetailBtn.background= barOff
-//            }
-//        }
-//        binding.albumVideoBtn.setOnClickListener{
-//            val btnStatus: Drawable = binding.albumVideoBtn.background
-//            if(btnStatus.constantState ==  barOff.constantState){
-//                binding.albumSubTitleBtn.background=barOff
-//                binding.albumDetailBtn.background=barOff
-//                binding.albumVideoBtn.background=barOn
-//            }else{
-//                binding.albumVideoBtn.background= barOff
-//            }
-//        }
-//
-//        binding.albumWholeSelectBtn.setOnClickListener {
-//            val ALL ="전체선택"
-//            val NONE="선택해제"
-//            if(binding.albumWholeSelectBtn.text.equals(NONE)){
-//                binding.albumWholeSelectBtn.setTextColor(resources.getColor(R.color.black,null))
-//                binding.albumWholeSelectCheckBtn.clearColorFilter()
-//                binding.albumWholeSelectBtn.text=ALL
-//                binding.albumListLayout.background=null
-//            }else{
-//                binding.albumWholeSelectBtn.setTextColor(resources.getColor(R.color.blue,null))
-//                binding.albumWholeSelectCheckBtn.setColorFilter(R.color.blue)
-//                binding.albumWholeSelectBtn.text=NONE
-//                binding.albumListLayout.setBackgroundColor(resources.getColor(R.color.silver,null))
-//            }
-//        }
+
 
 
         binding.albumHeartBtn.setOnClickListener {
@@ -171,6 +91,21 @@ class AlbumFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun setInit(album: Album) {
+        binding.albumAlbumIv.setImageResource(album.coverImg!!)
+        binding.albumSongTitleTv.text = album.title
+        binding.albumSongSingerTv.text = album.singer
+
+
+        val albumAdapter = AlbumViewpagerAdapter(this, binding.albumSongTitleTv.text.toString(),  binding.albumSongSingerTv.text.toString())
+        binding.albumContentVp.adapter= albumAdapter
+
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp){
+            tab,position->
+            tab.text = information[position]
+        }.attach()
     }
 
 }
