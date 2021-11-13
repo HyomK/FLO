@@ -63,8 +63,7 @@ class MainActivity : AppCompatActivity(){
         }
 
         binding.mainPlayerLayout.setOnClickListener{
-            // startActivity(Intent(this, SongActivity::class.java))
-//            mediaPlayer?.start() // 바로 시작하기
+
 
             Log.d("mytag", song.singer + " " + song.title)
             val intent =Intent(this, SongActivity::class.java)
@@ -94,6 +93,13 @@ class MainActivity : AppCompatActivity(){
         }
 
         initNavigation()
+
+
+    }
+
+    private fun initNavigation() {
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
+                .commitAllowingStateLoss()
 
 
         if (Build.VERSION.SDK_INT in 21..29) {
@@ -146,11 +152,6 @@ class MainActivity : AppCompatActivity(){
             false
         }
 
-    }
-
-    private fun initNavigation() {
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
-                .commitAllowingStateLoss()
 
     }
 
