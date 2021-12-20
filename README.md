@@ -1,7 +1,7 @@
 ## FLO Clone Project
-프로젝트에 사용된 서버는 종료되어 API 사용이 불가능합니다.\br
-녹화 영상을 통해 실제 적용모습을 확인해 주세요 \br
-사용 DB: Room Database
+프로젝트에 사용된 서버는 종료되어 API 사용이 불가능합니다.\n
+녹화 영상을 통해 실제 적용모습을 확인해 주세요 \n
+사용 DB: Room Database\n
 
 *구현 주요 기능
   * HomeFragment -> 화면 실행 시 가장 처음보이는 화면 
@@ -17,9 +17,9 @@
     * API 를 통해 회원 관리
     * 회원 가입 및 로그인 기능
   * LockerFragment
-    *DB에 저장된 앨범, 노래들을 recyclerView로 뿌려줌
+    * DB에 저장된 앨범, 노래들을 recyclerView로 뿌려줌
   * lookFragment
     * API를 통해 FLO차트 정보를 받아 뿌려줌
   * SavedSongFragment  
-    *이용자에 따라 좋아요한 곡 테이블 정보를 가져와 보여줌
+    * 이용자에 따라 좋아요한 곡 테이블 정보를 가져와 보여줌
    
