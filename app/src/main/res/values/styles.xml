@@ -25,4 +25,12 @@
         <item name="android:tabStripEnabled">false</item>
 
     </style>
+
+    <style name="FilledBoxEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="endIconTint">@color/black</item>
+        <item name="background">@color/white</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
+    </style>
+
 </resources>

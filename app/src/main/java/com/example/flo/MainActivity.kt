@@ -11,21 +11,29 @@ import android.view.View
 import android.view.View.*
 import android.view.WindowManager
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(){
 
 
         lateinit var binding: ActivityMainBinding
-        private var gson : Gson= Gson()
-        private var song :Song= Song()
+
+        private var nowPos=0
         private var mediaPlayer:MediaPlayer?=null
         private var duration:Int =1
         private lateinit var player: MainActivity.Player
         private lateinit var  timer: MainActivity.Timer
+        private var songs =ArrayList<Song>()
+        private lateinit var song:Song
+        private lateinit var songDB:SongDatabase
+
+
         override fun onCreate(savedInstanceState: Bundle?) {
+            Log.d("ONCREATE", "ONCREATE FLO")
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,6 +41,10 @@ class MainActivity : AppCompatActivity(){
 
             timer=Timer(false)
             timer.start()
+
+         initNavigation()
+         inputDummyAlbums()
+        inputDummySongs()
 
 
         if(intent.hasExtra("titleNow") && intent.hasExtra("SingerNow")){
@@ -65,37 +77,80 @@ class MainActivity : AppCompatActivity(){
         binding.mainPlayerLayout.setOnClickListener{
 
 
-            Log.d("mytag", song.singer + " " + song.title)
-            val intent =Intent(this, SongActivity::class.java)
-            intent.putExtra("mtitle", song.title)
-            intent.putExtra("msinger", song.singer)
-            intent.putExtra("msecond", song.second)
-            intent.putExtra("mplayTime", song.playTime)
-            intent.putExtra("mpos",song.pos)
-            intent.putExtra("misPlaying", song.isPlaying)
-            intent.putExtra("mmusic", song.music)
 
+            val editor=getSharedPreferences("song",MODE_PRIVATE).edit()
+            editor.putInt("songId",song.id)
+            editor.apply()
+            val intent=Intent(this@MainActivity,SongActivity::class.java)
             startActivity(intent)
 
 
         }
         binding.mainMiniplayerPreBtn.setOnClickListener {
-            song.second=0
-            song.pos=0
-            binding.mainSeekbar.progress=0
-            val music= resources.getIdentifier(song.music,"raw",this.packageName)
-            if(mediaPlayer!=null){
-                Log.d("interrupt", "다시 재생을 시작합니다.")
-                mediaPlayer?.release()
-                mediaPlayer= MediaPlayer.create(this,music)
-                if(song.isPlaying)mediaPlayer?.start()
-            }
+            player.interrupt()
+            songInit(song)
+            Log.d("interrupt", "이전 곡으로 돌아갑니다 ." + -1+song.id)
+            nowPos = song.id
+            songDB.songDao().update(song)
+            nowPos--
+            moveSong(-1)
+
+        }
+        binding.mainMiniplayerPnxtbtn.setOnClickListener {
+            player.interrupt()
+            songInit(song)
+            Log.d("interrupt", "다음 곡으로 이동합니다 ." + song.id+1)
+            nowPos = song.id
+            songDB.songDao().update(song)
+            nowPos--
+            moveSong(+1)
         }
 
-        initNavigation()
-
-
     }
+    private fun songInit(song: Song){
+        song.second = 0
+        song.pos = 0
+        binding.mainSeekbar.progress = 0
+    }
+
+
+    private fun moveSong(direct:Int){
+        if (nowPos + direct < 0){
+            Toast.makeText(this,"first song", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (nowPos + direct >= songs.size){
+            Toast.makeText(this,"last song", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        song=songs[nowPos+direct]
+
+        val music= resources.getIdentifier(song.music,"raw",this.packageName)
+        if(mediaPlayer!=null){
+            Log.d("interrupt", "이전 곡:."+song.id)
+            mediaPlayer?.release()
+            mediaPlayer=null
+
+            mediaPlayer= MediaPlayer.create(this,music)
+            duration=mediaPlayer?.duration!!
+            binding.mainSeekbar.max=duration
+            song.isPlaying=true
+            setMiniPlayer(song)
+            mediaPlayer?.start()
+            startTimer()
+
+        }
+    }
+
+    private fun startTimer(){
+        player=Player(songs[nowPos].playTime,songs[nowPos].isPlaying)
+        player.start()
+    }
+
+
+
 
     private fun initNavigation() {
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment())
@@ -160,7 +215,6 @@ class MainActivity : AppCompatActivity(){
         Log.d("interrupt", "SetMiniPlayer 의 결과."+ song.second.toString())
         binding.mainMiniplayerTitleTv.text=song.title
         binding.mainMiniplayerSingerTv.text=song.singer
-        //binding.mainSeekbar.progress=  song.second * 1000 / song.playTime
         binding.mainSeekbar.progress=  song.second * duration / song.playTime
 
 
@@ -246,12 +300,15 @@ class MainActivity : AppCompatActivity(){
     override fun onStart() {
         super.onStart()
 
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val jsongSong = sharedPreferences.getString("song",null)
-        if(jsongSong== null){
-            song= Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(),0,210,0,false,"music_lilac")
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId", 0)
+        val songDB = SongDatabase.getInstance(this)!!
+
+
+        if(songId == 0){
+            song= songDB.songDao().getSong(1)
         }else{
-            song = gson.fromJson(jsongSong, Song::class.java)
+            song =  songDB.songDao().getSong(songId)
         }
 
         Log.d("tag", "@@@@@@@@@@@start@@@@@@@@@@@" +song.isPlaying.toString())
@@ -265,7 +322,7 @@ class MainActivity : AppCompatActivity(){
 
         duration=mediaPlayer?.duration!! // duration
         binding.mainSeekbar.max=duration
-
+        Log.d("song ID", song.id.toString())
         setMiniPlayer(song)
         mediaPlayer?.seekTo(song.pos)//
         if(song.isPlaying) mediaPlayer?.start() // 바로 시작하기
@@ -286,12 +343,15 @@ class MainActivity : AppCompatActivity(){
         mediaPlayer?.stop()
         val sharedPreferences=getSharedPreferences("song", MODE_PRIVATE)
         val editor= sharedPreferences.edit() // 조작할 때 사용을 합니다
-        //Gson
-        val json = gson.toJson(song)
-        editor.putString("song",json)
+
+
+        editor.putInt("songId",song.id)
         editor.apply()
         mediaPlayer?.release() // 미디어 플레어가 갖고 있더 리소스 해제
         mediaPlayer=null
+        songDB.songDao().update(song)
+
+
 
     }
 
@@ -300,10 +360,263 @@ class MainActivity : AppCompatActivity(){
         Log.d("tag", "@@@@@@@@@@@Destroy@@@@@@@@@@@")
         mediaPlayer?.release() // 미디어 플레어가 갖고 있더 리소스 해제
         mediaPlayer=null
+
     }
 
 
+
+
+private fun inputDummyAlbums() {
+    songDB = SongDatabase.getInstance(this)!!
+    val albums = songDB.albumDao().getAlbums()
+
+    if (albums.isNotEmpty()){
+        Log.d("SONG DB INIT", "NOT EMPTY")
+        return
+    }
+
+    songDB.albumDao().insert(
+        Album(
+            1,
+            "IU 5th Album 'LILAC'", "아이유 (IU)", R.drawable.img_album_exp2 ,""
+        )
+    )
+
+    songDB.albumDao().insert(
+        Album(
+            2,
+            "Butter", "방탄소년단 (BTS)", R.drawable.img_album_exp,""
+        )
+    )
+
+    songDB.albumDao().insert(
+        Album(
+            3,
+            "iScreaM Vol.10 : Next Level Remixes", "에스파 (AESPA)", R.drawable.img_album_exp3,""
+        )
+    )
+
+    songDB.albumDao().insert(
+        Album(
+            4,
+            "MAP OF THE SOUL : PERSONA", "방탄소년단 (BTS)", R.drawable.img_album_exp4,""
+        )
+    )
+
+    songDB.albumDao().insert(
+        Album(
+            5,
+            "GREAT!", "모모랜드 (MOMOLAND)", R.drawable.img_album_exp5,""
+        )
+    )
+
 }
 
+//ROOM_DB
+private fun inputDummySongs() {
+    val songDB = SongDatabase.getInstance(this)!!
+    songs.addAll(songDB.songDao().getSongs())
+
+    if (songs.isNotEmpty()) return
+
+    songDB.songDao().insert(
+            Song(
+                    "Strawberry moon",
+                    "아이유 (IU)",
+                    0,
+                    200,
+                    0,
+                    false,
+                    "music_strawberrymoon",
+                    R.drawable.img_album_exp2,
+                    "",
+                    false,
+                    1
+            )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Lilac",
+            "아이유 (IU)",
+            0,
+            200,
+            0,
+            false,
+            "music_lilac",
+              R.drawable.img_album_exp2,
+                "",
+            false,
+            1
+        )
+    )
+
+
+    songDB.songDao().insert(
+        Song(
+            "Butter",
+            "방탄소년단 (BTS)",
+            0,
+            190,
+            0,
+            false,
+            "butter",
+            R.drawable.img_album_exp,
+                "",
+            false,
+            2
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Butter (Hotter Remix)",
+            "방탄소년단 (BTS)",
+            0,
+            190,
+            0,
+            false,
+            "butter",
+            R.drawable.img_album_exp,
+                "",
+            false,
+            2
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Butter (Sweeter Remix)",
+            "방탄소년단 (BTS)",
+            0,
+            190,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp,
+                "",
+            false,
+            2
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Next Level",
+            "에스파 (AESPA)",
+            0,
+            210,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp3,
+                "",
+            false,
+            3
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Next Level (IMLAY Remix)",
+            "에스파 (AESPA)",
+            0,
+            210,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp3,
+                "",
+            false,
+            3
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Boy with Luv",
+            "방탄소년단 (BTS)",
+            0,
+            230,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp4,
+                "",
+            false,
+            4
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "소우주 (Mikrokosmos)",
+            "방탄소년단 (BTS)",
+            0,
+            230,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp4,
+                "",
+            false,
+            4
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "Make It Right",
+            "방탄소년단 (BTS)",
+            0,
+            230,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp4,
+                "",
+            false,
+            4
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "BBoom BBoom",
+            "모모랜드 (MOMOLAND)",
+            0,
+            240,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp5,
+                "",
+            false,
+            5
+        )
+    )
+
+    songDB.songDao().insert(
+        Song(
+            "궁금해",
+            "모모랜드 (MOMOLAND)",
+            0,
+            240,
+            0,
+            false,
+            "music_lilac",
+            R.drawable.img_album_exp5,
+                "",
+            false,
+            5
+        )
+    )
+
+
+    val _songs = songDB.songDao().getSongs()
+    Log.d("DB DATA", _songs.toString())
+
+    }
+}
 
 

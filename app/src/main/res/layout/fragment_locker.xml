@@ -30,16 +30,26 @@
                android:textSize="20dp"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent" />
-
            <TextView
+               android:id="@+id/locker_user.tv"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toStartOf="@+id/locker_login.tv"
+               app:layout_constraintBottom_toBottomOf="@+id/locker_title_tv"
+               android:layout_marginEnd="20dp"
+               android:text=""
+               android:textColor="@color/flo_main"
+               android:textSize="13sp"/>
+           <TextView
+               android:id="@+id/locker_login.tv"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintBottom_toBottomOf="@+id/locker_title_tv"
                android:layout_marginEnd="20dp"
                android:text="로그인"
-               android:textColor="@color/design_default_color_primary"
-               android:textSize="12sp"/>
+               android:textColor="@color/flo_main"
+               android:textSize="13sp"/>
 
        </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -47,7 +57,7 @@
 
        <com.google.android.material.tabs.TabLayout
            android:id="@+id/locker_tb"
-           android:layout_width="150dp"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginStart="8dp"
            android:layout_marginTop="5dp"
@@ -61,8 +71,8 @@
            app:tabTextColor="@color/black"
            app:tabTextAppearance="@style/locker_tab_text"
            app:tabRippleColor="@android:color/transparent"
-           app:tabSelectedTextColor="@color/design_default_color_primary"
-           app:tabIndicatorColor="@color/design_default_color_primary"
+           app:tabSelectedTextColor="@color/flo_main"
+           app:tabIndicatorColor="@color/flo_main"
 
            />
        <androidx.viewpager2.widget.ViewPager2

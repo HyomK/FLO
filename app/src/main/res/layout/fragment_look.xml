@@ -214,339 +214,350 @@
                     android:layout_height="wrap_content"
 
                     >
-
-                    <LinearLayout
-
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/look_flo_chart_rv"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="300dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/look_chart_exp_tv">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/look_chart_exp_tv"
+                        />
 
-                        <GridLayout
-                            android:id="@+id/look_chart_item_01_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:columnCount="4"
-                            android:rowCount="2">
+<!--                    <LinearLayout-->
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnSpan="1"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:background="@drawable/round_corner"
-                                android:src="@drawable/img_album_exp2" />
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/look_chart_exp_tv">-->
 
+<!--                        <GridLayout-->
+<!--                            android:id="@+id/look_chart_item_01_layout"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:columnCount="4"-->
+<!--                            android:rowCount="2">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="top"
-                                android:layout_marginLeft="13dp"
-                                android:layout_rowSpan="2"
-                                android:text="1"
-                                android:paddingTop="5dp"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="13dp"
-                                android:layout_row="0"
-                                android:paddingTop="7dp"
-                                android:textColor="@color/black"
-                                android:text="잠이안온다"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/btn_miniplayer_play" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_columnSpan="1"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:background="@drawable/round_corner"-->
+<!--                                android:src="@drawable/img_album_exp2" />-->
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="fill"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginLeft="13dp"
-                                android:text="젠(zen)"
-                                android:textSize="11sp"
-                                />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="top"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:text="1"-->
+<!--                                android:paddingTop="5dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:textStyle="bold" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_row="0"-->
+<!--                                android:paddingTop="7dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:text="잠이안온다"-->
+<!--                                android:textSize="13sp"-->
+<!--                                android:textStyle="bold" />-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/btn_miniplayer_play" />-->
 
 
-                        </GridLayout>
-
-                        <GridLayout
-                            android:id="@+id/look_chart_item_02_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:columnCount="4"
-                            android:rowCount="2"
-
-                            >
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnSpan="1"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/img_album_exp2" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="top"
-                                android:layout_marginLeft="13dp"
-                                android:layout_rowSpan="2"
-                                android:text="2"
-                                android:paddingTop="5dp"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginBottom="5dp"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:text="젠(zen)"-->
+<!--                                android:textSize="11sp"-->
+<!--                                />-->
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="13dp"
-                                android:layout_row="0"
-                                android:paddingTop="7dp"
-                                android:textColor="@color/black"
-                                android:text="잠이안온다"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/btn_miniplayer_play" />
+<!--                        </GridLayout>-->
+
+<!--                        <GridLayout-->
+<!--                            android:id="@+id/look_chart_item_02_layout"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:columnCount="4"-->
+<!--                            android:rowCount="2"-->
+
+<!--                            >-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_columnSpan="1"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/img_album_exp2" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="top"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:text="2"-->
+<!--                                android:paddingTop="5dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:textStyle="bold" />-->
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="fill"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginLeft="13dp"
-                                android:text="젠(zen)"
-                                android:textSize="11sp"
-                                 />
-
-                        </GridLayout>
-
-                        <GridLayout
-                            android:id="@+id/look_chart_item_03_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:columnCount="4"
-                            android:rowCount="2">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnSpan="1"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/img_album_exp2" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="top"
-                                android:layout_marginLeft="13dp"
-                                android:layout_rowSpan="2"
-                                android:text="3"
-                                android:paddingTop="5dp"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="13dp"
-                                android:layout_row="0"
-                                android:paddingTop="7dp"
-                                android:text="잠이안온다"
-                                android:textColor="@color/black"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/btn_miniplayer_play" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_row="0"-->
+<!--                                android:paddingTop="7dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:text="잠이안온다"-->
+<!--                                android:textSize="13sp"-->
+<!--                                android:textStyle="bold" />-->
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/btn_miniplayer_play" />-->
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="fill"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginLeft="13dp"
-                                android:text="젠(zen)"
-                                android:textSize="11sp"
-                                 />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginBottom="5dp"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:text="젠(zen)"-->
+<!--                                android:textSize="11sp"-->
+<!--                                 />-->
 
-                        </GridLayout>
+<!--                        </GridLayout>-->
 
-                        <GridLayout
-                            android:id="@+id/look_chart_item_04_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:columnCount="4"
-                            android:rowCount="2">
+<!--                        <GridLayout-->
+<!--                            android:id="@+id/look_chart_item_03_layout"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:columnCount="4"-->
+<!--                            android:rowCount="2">-->
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnSpan="1"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/img_album_exp2" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_columnSpan="1"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/img_album_exp2" />-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="top"
-                                android:layout_marginLeft="13dp"
-                                android:layout_rowSpan="2"
-                                android:text="4"
-                                android:paddingTop="5dp"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="13dp"
-                                android:layout_row="0"
-                                android:paddingTop="7dp"
-                                android:text="잠이안온다"
-                                android:textSize="13sp"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/btn_miniplayer_play" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="top"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:text="3"-->
+<!--                                android:paddingTop="5dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:textStyle="bold" />-->
 
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginLeft="13dp"
-                                android:text="젠(zen)"
-                                android:textSize="11sp" />
-
-                        </GridLayout>
-
-                        <GridLayout
-                            android:id="@+id/look_chart_item_05_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:layout_marginTop="5dp"
-                            android:columnCount="4"
-                            android:rowCount="2">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_columnSpan="1"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/img_album_exp2" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="top"
-                                android:layout_marginLeft="13dp"
-                                android:layout_rowSpan="2"
-                                android:text="5"
-                                android:paddingTop="5dp"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="2"
-                                android:layout_gravity="fill"
-                                android:layout_marginLeft="13dp"
-                                android:layout_row="0"
-                                android:paddingTop="7dp"
-                                android:text="잠이안온다"
-                                android:textColor="@color/black"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_rowSpan="2"
-                                android:src="@drawable/btn_miniplayer_play" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_row="0"-->
+<!--                                android:paddingTop="7dp"-->
+<!--                                android:text="잠이안온다"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="13sp"-->
+<!--                                android:textStyle="bold" />-->
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/btn_miniplayer_play" />-->
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="fill"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginLeft="13dp"
-                                android:text="젠(zen)"
-                                android:textSize="11sp"
-                                 />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginBottom="5dp"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:text="젠(zen)"-->
+<!--                                android:textSize="11sp"-->
+<!--                                 />-->
 
-                        </GridLayout>
+<!--                        </GridLayout>-->
+
+<!--                        <GridLayout-->
+<!--                            android:id="@+id/look_chart_item_04_layout"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:columnCount="4"-->
+<!--                            android:rowCount="2">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_columnSpan="1"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/img_album_exp2" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="top"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:text="4"-->
+<!--                                android:paddingTop="5dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:textStyle="bold" />-->
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_row="0"-->
+<!--                                android:paddingTop="7dp"-->
+<!--                                android:text="잠이안온다"-->
+<!--                                android:textSize="13sp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textStyle="bold" />-->
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/btn_miniplayer_play" />-->
 
 
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginBottom="5dp"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:text="젠(zen)"-->
+<!--                                android:textSize="11sp" />-->
+
+<!--                        </GridLayout>-->
+
+<!--                        <GridLayout-->
+<!--                            android:id="@+id/look_chart_item_05_layout"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginBottom="20dp"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            android:columnCount="4"-->
+<!--                            android:rowCount="2">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="40dp"-->
+<!--                                android:layout_height="40dp"-->
+<!--                                android:layout_columnSpan="1"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/img_album_exp2" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="top"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:text="5"-->
+<!--                                android:paddingTop="5dp"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="16sp"-->
+<!--                                android:textStyle="bold" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_column="2"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:layout_row="0"-->
+<!--                                android:paddingTop="7dp"-->
+<!--                                android:text="잠이안온다"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="13sp"-->
+<!--                                android:textStyle="bold" />-->
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginEnd="10dp"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_rowSpan="2"-->
+<!--                                android:src="@drawable/btn_miniplayer_play" />-->
+
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="fill"-->
+<!--                                android:layout_marginBottom="5dp"-->
+<!--                                android:layout_marginLeft="13dp"-->
+<!--                                android:text="젠(zen)"-->
+<!--                                android:textSize="11sp"-->
+<!--                                 />-->
+
+<!--                        </GridLayout>-->
+
+
+<!--                    </LinearLayout>-->
 
 
                     <TextView
@@ -962,5 +973,17 @@
 
 
     </ScrollView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/look_loading_pb"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="@color/flo_main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

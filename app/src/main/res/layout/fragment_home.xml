@@ -566,15 +566,42 @@
             app:layout_constraintTop_toBottomOf="@+id/home_recycleview_rv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/home_podcast_title_tv"
+
             />
 
+        <TextView
+            android:id="@+id/home_today_rv_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="당신의 하루를 책임질게요"
+            app:layout_constraintTop_toBottomOf="@+id/home_banner__vp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
+            android:layout_height="210dp"
+            android:id="@+id/home_today_recycleview_rv"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="10dp"
+            tools:listitem="@layout/item_album"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/home_today_rv_title_tv"
+            android:layout_marginTop="10dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
         <TextView
             android:id="@+id/home_podcast_title_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="매일 들어도 좋은 팟캐스트"
-            app:layout_constraintTop_toBottomOf="@+id/home_banner__vp"
+            app:layout_constraintTop_toBottomOf="@+id/home_today_recycleview_rv"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"

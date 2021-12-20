@@ -33,144 +33,197 @@ class SongActivity: AppCompatActivity() {
     private val handler= Handler(Looper.getMainLooper())
     private lateinit var runnable: Runnable
 
+    private var songs = ArrayList<Song>()
+    private var nowPos = 0
+    private lateinit var songDB: SongDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initPlayList()
         initSong()
-
-
-               binding.songDownIc.setOnClickListener{
-                   finish()
-               }
-
-
-
-               binding.songPlayIc.setOnClickListener {
-
-//                   if(song.pos==null)  mediaPlayer?.seekTo(0)
-//                   else mediaPlayer?.seekTo(song.pos!!)
-
-                   player.isPlaying=true
-                   setPlayerStatus(true)
-                   song.isPlaying=true
-                   mediaPlayer?.start()
-               }
-               binding.songPauseIc.setOnClickListener {
-                   pos = mediaPlayer?.currentPosition
-                   song.pos=pos!!
-
-                   player.isPlaying=false
-                   setPlayerStatus(false)
-                   song.isPlaying=false
-                   mediaPlayer?.pause()
-               }
-
-               binding.songPreviousIc.setOnClickListener {
-                   song.second=0
-                   song.pos=0
-                   binding.songStartTimeTv.text = String.format("%02d:%02d", 0, 0)
-                   binding.songSeekbar.progress=0
-                   val music= resources.getIdentifier(song.music,"raw",this.packageName)
-                   if(mediaPlayer!=null){
-                       Log.d("interrupt", "다시 재생을 시작합니다.")
-
-                        mediaPlayer?.release()
-                        mediaPlayer= MediaPlayer.create(this,music)
-                       if(song.isPlaying)mediaPlayer?.start()
-                   }
-               }
-
-              binding.songHeartIc.setOnClickListener {
-
-                  binding.songHeartIc.setImageDrawable(
-                          switchBtn(resources.getDrawable(R.drawable.ic_my_like_off, null),
-                                  resources.getDrawable(R.drawable.ic_my_like_on, null),
-                                  binding.songHeartIc.drawable))
-                }
-
-                binding.songUnlikeIc.setOnClickListener {
-
-                    binding.songUnlikeIc.setImageDrawable(
-                            switchBtn(resources.getDrawable(R.drawable.btn_player_unlike_off, null),
-                                    resources.getDrawable(R.drawable.btn_player_unlike_on, null),
-                                    binding.songUnlikeIc.drawable))
-
-                }
-                binding.songShuffleIc.setOnClickListener {
-
-                    val ON : Drawable =  resources.getDrawable(R.drawable.btn_playlist_random_on, null)
-                    val OFF : Drawable =  resources.getDrawable(R.drawable.nugu_btn_random_inactive, null)
-
-                    if(binding.songShuffleIc.drawable.constantState == ON.constantState){
-                        binding.songShuffleIc.setImageDrawable(OFF);
-                        CustomToast.createToast(this, "재생목록을 순서대로 재생합니다")?.show()
-                    }else{
-                        binding.songShuffleIc.setImageDrawable(ON);
-                        CustomToast.createToast(this, "재생목록을 랜덤으로 재생합니다")?.show()
-                    }
-                }
-
-                binding.songRepeatIc.setOnClickListener {
-
-
-                    val all : Drawable =  resources.getDrawable(R.drawable.btn_playlist_repeat_on, null)
-                    val none : Drawable =  resources.getDrawable(R.drawable.nugu_btn_repeat_inactive, null)
-                    val one :Drawable = resources.getDrawable(R.drawable.btn_playlist_repeat_on1, null)
-
-                    if(binding.songRepeatIc.drawable.constantState == none.constantState){
-                        binding.songRepeatIc.setImageDrawable(all);
-                        CustomToast.createToast(this, "전체 음악을 반복합니다")?.show()
-                    }else if(binding.songRepeatIc.drawable.constantState == all.constantState){
-                        binding.songRepeatIc.setImageDrawable(one);
-                        CustomToast.createToast(this, "현재 음악을 반복합니다")?.show()
-                    }else{
-                        binding.songRepeatIc.setImageDrawable(none);
-                        CustomToast.createToast(this, "반복을 사용하지 않습니다")?.show()
-                    }
-
-                }
-
-
+        initClickListener()
 
 
 
     }
 
-
-
-
-
-
-    private fun initSong(){
-        if(intent.hasExtra("mtitle") && intent.hasExtra("msinger")&& intent.hasExtra("msecond")
-                &&intent.hasExtra("mplayTime")&&intent.hasExtra("mpos")&&intent.hasExtra("misPlaying")
-                && intent.hasExtra("mmusic")){
-
-            song.title=intent.getStringExtra("mtitle")!!
-            song.singer= intent.getStringExtra("msinger")!!
-            song.second=intent.getIntExtra("msecond",0)
-            song.playTime=intent.getIntExtra("mplayTime",0)
-            song.pos=intent.getIntExtra("mos",0)
-            song.isPlaying=intent.getBooleanExtra("misPlaying",false)
-            song.music=intent.getStringExtra("mmusic")!!
-            Log.d("interrupt", "Song class " +intent.getStringExtra("mtitle")!!+intent.getStringExtra("msinger")!!)
-            binding.songSongTitleTv.text= song.title
-            binding.songSongSingerTv.text= song.singer
-            binding.songEndTimeTv.text=String.format("%02d:%02d",song.playTime/60,song.playTime%60)
-            //song.isPlaying=true // 바로 재
-            setPlayerStatus(song.isPlaying)
-
+    private fun initClickListener() {
+        binding.songDownIc.setOnClickListener {
+            finish()
         }
 
 
+        binding.songPlayIc.setOnClickListener {
+
+            player.isPlaying = true
+            setPlayerStatus(true)
+            songs[nowPos].isPlaying = true
+            mediaPlayer?.start()
+        }
+        binding.songPauseIc.setOnClickListener {
+            pos = mediaPlayer?.currentPosition
+            songs[nowPos].pos = pos!!
+
+            player.isPlaying = false
+            setPlayerStatus(false)
+            songs[nowPos].isPlaying = false
+            mediaPlayer?.pause()
+        }
+
+        binding.songPreviousIc.setOnClickListener {
+
+            val music = resources.getIdentifier(songs[nowPos].music, "raw", this.packageName)
+            if (mediaPlayer != null) {
+                Log.d("interrupt", "다시 재생을 시작합니다.")
+                mediaPlayer?.release()
+                mediaPlayer = MediaPlayer.create(this, music)
+                if (songs[nowPos].isPlaying) mediaPlayer?.start()
+            }
+            moveSong(-1)
+        }
+
+        binding.songNextIc.setOnClickListener {
+            moveSong(+1)
+        }
+
+        binding.songHeartIc.setOnClickListener {
+            setLike(songs[nowPos].isLike)
+        }
+
+        binding.songUnlikeIc.setOnClickListener {
+
+            setLike(songs[nowPos].isLike)
+
+        }
+        binding.songShuffleIc.setOnClickListener {
+
+            val ON: Drawable = resources.getDrawable(R.drawable.btn_playlist_random_on, null)
+            val OFF: Drawable = resources.getDrawable(R.drawable.nugu_btn_random_inactive, null)
+
+            if (binding.songShuffleIc.drawable.constantState == ON.constantState) {
+                binding.songShuffleIc.setImageDrawable(OFF);
+                CustomToast.createToast(this, "재생목록을 순서대로 재생합니다")?.show()
+            } else {
+                binding.songShuffleIc.setImageDrawable(ON);
+                CustomToast.createToast(this, "재생목록을 랜덤으로 재생합니다")?.show()
+            }
+        }
+
+        binding.songRepeatIc.setOnClickListener {
+
+
+            val all: Drawable = resources.getDrawable(R.drawable.btn_playlist_repeat_on, null)
+            val none: Drawable = resources.getDrawable(R.drawable.nugu_btn_repeat_inactive, null)
+            val one: Drawable = resources.getDrawable(R.drawable.btn_playlist_repeat_on1, null)
+
+            if (binding.songRepeatIc.drawable.constantState == none.constantState) {
+                binding.songRepeatIc.setImageDrawable(all);
+                CustomToast.createToast(this, "전체 음악을 반복합니다")?.show()
+            } else if (binding.songRepeatIc.drawable.constantState == all.constantState) {
+                binding.songRepeatIc.setImageDrawable(one);
+                CustomToast.createToast(this, "현재 음악을 반복합니다")?.show()
+            } else {
+                binding.songRepeatIc.setImageDrawable(none);
+                CustomToast.createToast(this, "반복을 사용하지 않습니다")?.show()
+            }
+
+        }
+    }
+
+
+    private fun initSong(){
+        val spf=getSharedPreferences("song", MODE_PRIVATE)
+        val songId=spf.getInt("songId",0)
+        nowPos=getPlayingSongPosition(songId)
+        Log.d("[Song activity]now",songId.toString()+songs[nowPos].title)
+        //startTimer()
+        setPlayer(songs[nowPos])
+        Log.d("[Song activity IsLike]",songDB.songDao().getSong(songs[nowPos].id).isLike.toString())
+
+    }
+    private fun initPlayList(){
+
+        songs.clear()
+        songDB= SongDatabase.getInstance(this)!!
+        songs.addAll(songDB.songDao().getSongs())
+        Log.d("[Song InitPlayList]",songs.size.toString())
+
+    }
+
+    private fun setPlayer(song:Song){
+
+        binding.songSongTitleTv.text= songs[nowPos].title
+        binding.songSongSingerTv.text= songs[nowPos].singer
+        binding.songStartTimeTv.text =
+            String.format("%02d:%02d", songs[nowPos].second / 60, songs[nowPos].second % 60)
+        binding.songEndTimeTv.text=String.format("%02d:%02d",song.playTime/60,song.playTime%60)
+        binding.songAlbumIv.setImageResource(song.coverImg!!)
+
+        setPlayerStatus(songs[nowPos].isPlaying)
+
+        if (songs[nowPos].isLike) {
+            binding.songHeartIc.setImageResource(R.drawable.ic_my_like_on)
+        } else {
+            binding.songHeartIc.setImageResource(R.drawable.ic_my_like_off)
+        }
     }
 
 
 
+    private fun getPlayingSongPosition(songId: Int): Int{
+        for (i in 0 until songs.size){
+            if (songs[i].id == songId){
+                return i
+            }
+        }
+        return 0
+    }
+
+
+    private fun moveSong(direct: Int){
+
+        if (nowPos + direct < 0){
+            Toast.makeText(this,"first song",Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (nowPos + direct >= songs.size){
+            Toast.makeText(this,"last song",Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        nowPos += direct
+        player.interrupt()
+
+
+        val music= resources.getIdentifier( songs[nowPos].music,"raw",this.packageName)
+        mediaPlayer?.release() // 미디어플레이어가 가지고 있던 리소스를 해방
+        mediaPlayer = null // 미디어플레이어 해제
+
+        mediaPlayer= MediaPlayer.create(this,music)
+        duration=mediaPlayer?.duration!!
+        binding.songSeekbar.max=duration
+
+
+        setPlayer(songs[nowPos])
+        songs[nowPos].isPlaying=true
+        setPlayerStatus( songs[nowPos].isPlaying)
+        mediaPlayer?.start()
+
+        startTimer()
+
+    }
+
     fun setPlayerStatus(isPlaying: Boolean){
+
+        binding.songSeekbar.progress= songs[nowPos].pos
+        binding.songStartTimeTv.text = String.format("%02d:%02d",  songs[nowPos].second / 60, songs[nowPos]. second % 60)
+
+        songs[nowPos].isPlaying = isPlaying//check
+
         if(isPlaying){
             binding.songPlayIc.visibility=View.GONE
             binding.songPauseIc.visibility = View.VISIBLE
@@ -183,26 +236,15 @@ class SongActivity: AppCompatActivity() {
     }
 
 
-    fun switchBtn(off: Drawable, on: Drawable, status: Drawable) : Drawable {
-        if(off.constantState==(status.constantState)){
-            return on
-        }
-        return off
-    }
-
-    fun updateSeekbar(){
-        binding.songSeekbar.setProgress(mediaPlayer?.currentPosition!!)
-        handler.postDelayed(runnable,1000)
-    }
 
     inner class Player(private val playTime: Int, var isPlaying: Boolean): Thread(){
-        private var second =song.second
+        private var second = songs[nowPos].second
         override fun run() {
             try {
-                while (true) {
+                while (!this.isInterrupted && mediaPlayer!=null) {
                     if (second >= playTime) {
-                        song.pos=0;
-                        song.second=0;
+                        songs[nowPos].pos=0;
+                        songs[nowPos].second=0;
                         break
                     }
                     if (isPlaying) {
@@ -218,11 +260,9 @@ class SongActivity: AppCompatActivity() {
                                     // Display the current progress of SeekBar
 
                                     binding.songSeekbar.progress=mediaPlayer?.currentPosition!!
-                                    song.pos=i
-                                   // second=i*song.playTime/1000
-                                   // binding.songStartTimeTv.text =String.format("%02d:%02d",(i*song.playTime/1000)/60,(i*song.playTime/1000)%60)
-                                    second=i*song.playTime/duration
-                                    binding.songStartTimeTv.text =String.format("%02d:%02d",(i*song.playTime/duration)/60,(i*song.playTime/duration)%60)
+                                    songs[nowPos].pos=i
+                                    second=i* songs[nowPos].playTime/duration
+                                    binding.songStartTimeTv.text =String.format("%02d:%02d",(i* songs[nowPos].playTime/duration)/60,(i* songs[nowPos].playTime/duration)%60)
 
                                 }
 
@@ -230,7 +270,7 @@ class SongActivity: AppCompatActivity() {
                                 }
 
                                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                                    mediaPlayer?.seekTo(song.pos)
+                                    mediaPlayer?.seekTo( songs[nowPos].pos)
                                    // binding.songStartTimeTv.text =String.format("%02d:%02d",(song.pos*song.playTime/duration)/60,(song.pos*song.playTime/duration)%60)
                                 }
                             })
@@ -238,8 +278,8 @@ class SongActivity: AppCompatActivity() {
                     }
                 }
             } catch (e : InterruptedException) {
-                song.second=second
-                Log.d("interrupt", "쓰레드가 종료되었습니다.")
+                songs[nowPos].second=second
+                Log.d("PLAYER interrupt", "PLAYER 쓰레드가 종료되었습니다.")
             }
         }
     }
@@ -247,43 +287,32 @@ class SongActivity: AppCompatActivity() {
 
 
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("tag", "##########start###############")
+
+    override fun onResume() {
+        super.onResume()
+        initPlayList()
+        initSong()
+
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val jsongSong = sharedPreferences.getString("song",null)
-        val music= resources.getIdentifier(song.music,"raw",this.packageName)
+        val music= resources.getIdentifier( songs[nowPos].music,"raw",this.packageName)
+        Log.d("Star_ttag", "##########start###############"+song.music)
 
-
-        if(jsongSong== null){
-
-        }else{
-            song =gson.fromJson(jsongSong, Song::class.java)
-        }
 
         mediaPlayer= MediaPlayer.create(this,music)
         duration=mediaPlayer?.duration!!
         binding.songSeekbar.max=duration
-        Log.d("POS IN SONG IN START ", song.pos.toString() + " || " +
-                song.second.toString()+" || " + duration.toString())
 
 
-        mediaPlayer?.seekTo(song.pos)
-        setPlayerStatus(song.isPlaying)
+        mediaPlayer?.seekTo( songs[nowPos].pos)
+        setPlayerStatus( songs[nowPos].isPlaying)
 
-        //binding.songSeekbar.progress=song.second* 1000 / song.playTime
-        //binding.songSeekbar.progress=song.second* duration / song.playTime
-        binding.songSeekbar.progress=song.pos
+        startTimer()
 
-        binding.songStartTimeTv.text = String.format("%02d:%02d", song.second / 60,song. second % 60)
+        if( songs[nowPos].isPlaying ) mediaPlayer?.start()
 
-        player=Player(song.playTime,song.isPlaying)
-        player.start()
-        if(song.isPlaying ) mediaPlayer?.start()
-
-        if(song.second==0){ // 처음 시작이라면
-            song.isPlaying=true
-            setPlayerStatus(song.isPlaying)
+        if( songs[nowPos].second==0){ // 처음 시작이라면
+            songs[nowPos].isPlaying=true
+            setPlayerStatus( songs[nowPos].isPlaying)
             player.isPlaying=true
             mediaPlayer?.start()
         }
@@ -292,40 +321,60 @@ class SongActivity: AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        Log.d("tag", "##########restart###############")
-
     }
+
 
 
     override fun onPause() {
         super.onPause()
-        Log.d("tag", "########pause###########")
-        song.pos=mediaPlayer?.currentPosition!!
-        Log.d("POS", song.pos.toString())
+        player.interrupt()
+        songs[nowPos].pos=mediaPlayer?.currentPosition!!
+        Log.d("POS",  songs[nowPos].pos.toString())
         if(mediaPlayer!=null) mediaPlayer?.stop()
 
-        song.second=(binding.songSeekbar.progress * song.playTime)/duration
+        songs[nowPos].second=(binding.songSeekbar.progress *  songs[nowPos].playTime)/duration
         val sharedPreferences=getSharedPreferences("song", MODE_PRIVATE)
         val editor= sharedPreferences.edit() // 조작할 때 사용을 합니다
-        //Gson
-        val json = gson.toJson(song)
-        editor.putString("song",json)
+
+        editor.putInt("songId",songs[nowPos].id)
         editor.apply()
-        player.interrupt()
+
         mediaPlayer?.release() // 미디어 플레어가 갖고 있더 리소스 해제
         mediaPlayer=null
+        songDB.songDao().update(songs[nowPos])
 
 
     }
 
     override fun onDestroy(){
-        Log.d("tag", "########DESTROY###########")
+
         player.interrupt()
+        Log.d("SONG destroy",  songs[nowPos].pos.toString())
         super.onDestroy()
         mediaPlayer?.release() // 미디어 플레어가 갖고 있더 리소스 해제
         mediaPlayer=null
     }
 
+
+
+    private fun startTimer(){
+        player=Player(songs[nowPos].playTime,songs[nowPos].isPlaying)
+        player.start()
+    }
+
+    private fun setLike(isLike: Boolean){
+        songs[nowPos].isLike = !isLike
+        Log.d("Like change","${songs[nowPos].id} is now .${!isLike}")
+        songDB.songDao().updateIsLikeById(!isLike,songs[nowPos].id)
+
+        if (isLike){
+            binding.songHeartIc.setImageResource(R.drawable.ic_my_like_off)
+
+        }else{
+            binding.songHeartIc.setImageResource(R.drawable.ic_my_like_on)
+        }
+        //songDB.songDao().update(songs[nowPos])
+    }
 
 
     object CustomToast {

@@ -1,12 +1,14 @@
 package com.example.flo
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemAlbumBinding
 
 
-class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
+class AlbumRVAdapter(private val albumList: ArrayList<Album>) :
+        RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
 
     interface MyItemClickLister{
         fun onItemClick(album: Album){
@@ -37,6 +39,13 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
 
     fun removeItem(position: Int){
         albumList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addAlbums(albums: ArrayList<Album>) {
+        this.albumList.clear()
+        this.albumList.addAll(albums)
         notifyDataSetChanged()
     }
 

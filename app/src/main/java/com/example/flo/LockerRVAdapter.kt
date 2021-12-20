@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +8,16 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemLockerBinding
 
-class LockerRVAdapter(private val storedList: ArrayList<Album>) : RecyclerView.Adapter<LockerRVAdapter.ViewHolder>() {
-
+class LockerRVAdapter(private val storedList: ArrayList<Song>) :
+        RecyclerView.Adapter<LockerRVAdapter.ViewHolder>() {
+    private val songs = ArrayList<Song>()
 
     interface LockerItemClickLister{
 
-        fun onRemoveSong(position: Int){
+        fun onRemoveSong(songId: Int){
+
+        }
+        fun onUnlikeSong(song: Song, position : Int){
 
         }
     }
@@ -26,6 +31,12 @@ class LockerRVAdapter(private val storedList: ArrayList<Album>) : RecyclerView.A
     fun setLockerItemClickListener(itemClickLister: LockerItemClickLister){
         myItemClickLister=itemClickLister
     }
+    fun unlikeItem(position: Int){
+
+        songs.removeAt(position)
+        notifyDataSetChanged()
+    }
+
 
     fun removeItem(position: Int){
 
@@ -34,19 +45,19 @@ class LockerRVAdapter(private val storedList: ArrayList<Album>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: LockerRVAdapter.ViewHolder, position: Int) {
-       holder.bind(storedList[position])
+        holder.bind(storedList[position])
         holder.binding.lockerFrMenuBtn.setOnClickListener {
-        myItemClickLister.onRemoveSong(position)
+            myItemClickLister.onRemoveSong(position)
         }
     }
 
     override fun getItemCount(): Int = storedList.size
 
     inner class ViewHolder(val binding:ItemLockerBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(album: Album){
-            binding.lockerItemCoverIv.setImageResource(album.coverImg!!)
-            binding.lockerItemSingerTv.text=album.singer
-            binding.lockerItemTitleTv.text=album.title
+        fun bind(song: Song){
+            binding.lockerItemCoverIv.setImageResource(song.coverImg!!)
+            binding.lockerItemSingerTv.text=song.singer
+            binding.lockerItemTitleTv.text=song.title
         }
     }
 

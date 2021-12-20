@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flo">
-
+  <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/im_main"
@@ -9,18 +9,23 @@
         android:roundIcon="@mipmap/im_main_round"
         android:supportsRtl="true"
         android:fitsSystemWindows="true"
+        android:usesCleartextTraffic="true"
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.BottomNaviTemplate">
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.example.flo.MainActivity"/>
-        <activity android:name="com.example.flo.SongActivity"></activity>
+        <activity android:name="com.example.flo.SongActivity"/>
+        <activity android:name="com.example.flo.SignupActivity"/>
+        <activity android:name="com.example.flo.LoginActivity">
+      </activity>
     </application>
+
+
 
 </manifest>

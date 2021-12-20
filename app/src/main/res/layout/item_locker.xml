@@ -47,7 +47,7 @@
             android:paddingTop="7dp"
             android:textColor="@color/black"
             android:text="Lilac"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <ImageView
