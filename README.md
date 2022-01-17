@@ -4,7 +4,7 @@
 사용 DB: Room Database <br/>
 
 
-<img width="80%" src="https://user-images.githubusercontent.com/78139690/149804055-0e7c38e6-2004-4c1f-a1f0-40b89115e68e.gif"/>
+<img width="30%" src="https://user-images.githubusercontent.com/78139690/149804055-0e7c38e6-2004-4c1f-a1f0-40b89115e68e.gif"/>
 
 
 
