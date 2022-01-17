@@ -4,7 +4,7 @@
 사용 DB: Room Database <br/>
 
 
-<img width="80%" src="https://github.com/HyomK/FLO/issues/1#issue-1106037485.gif"/>
+<img width="80%" src="https://github.com/HyomK/FLO/issues/1#issue-1106037485"/>
 
 출처: https://ndb796.tistory.com/557 [안경잡이개발자]
 
