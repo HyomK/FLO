@@ -4,9 +4,9 @@
 사용 DB: Room Database <br/>
 
 
-<img width="80%" src="https://github.com/HyomK/FLO/issues/1#issue-1106037485"/>
+<img width="80%" src="https://user-images.githubusercontent.com/78139690/149804055-0e7c38e6-2004-4c1f-a1f0-40b89115e68e.gif"/>
 
-출처: https://ndb796.tistory.com/557 [안경잡이개발자]
+
 
 * 구현 주요 기능
   * HomeFragment -> 화면 실행 시 가장 처음보이는 화면 
