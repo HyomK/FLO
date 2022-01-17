@@ -3,6 +3,11 @@
 녹화 영상을 통해 실제 적용모습을 확인해 주세요  <br/>
 사용 DB: Room Database <br/>
 
+
+<img width="80%" src="https://github.com/HyomK/FLO/issues/1#issue-1106037485.gif"/>
+
+출처: https://ndb796.tistory.com/557 [안경잡이개발자]
+
 * 구현 주요 기능
   * HomeFragment -> 화면 실행 시 가장 처음보이는 화면 
     * 슬라이딩 배너
